@@ -1,0 +1,6 @@
+{
+  "name": "Mand TV",
+  "description": "MAND TV - Live Kurdish and international TV stream player with M3U playlist integration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
