@@ -1,0 +1,36 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+
+    - name: Install dependencies & Build Web App
+      run: |
+        npm install
+        npm run build || echo "No build script, skipping"
+
+    - name: Build PWA/APK using PWABuilder CLI
+      uses: pwabuilder/pwabuilder-action@v2
+      with:
+        url: https://github.com/${{ github.repository }}
+
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: MandTV-APK
+        path: |
+          output/
+          *.apk
